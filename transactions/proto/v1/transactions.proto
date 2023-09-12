@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package transactions.v1;
+
+message Transaction {
+    string id = 1;
+    string product_id = 2;
+    string customer_id = 3;
+    uint32 quantity = 4;
+    double total_price = 5;
+    string created_at = 6;
+}
+
+message CreateTransactionRequest  {
+    string product_id = 1;
+    string customer_id = 2;
+    uint32 quantity = 4;
+}
+
+message GetTransactionRequest {
+    string id = 1;
+}
+
+message ListTransactionsRequest {}
+
+message GetTotalSalesRequest {}
+
+message GetTotalSalesResponse {
+    double total_sales = 1;
+}
+
+message SalesByProduct {
+    string product_id = 1;
+    double total_sales = 2;
+}
+
+message GetSalesByProductRequest {}
+message GetSalesByProductResponse {
+    repeated SalesByProduct sales_by_products = 1;
+}
+
+service TransactionService {
+    rpc GetTransactionById (GetTransactionRequest) returns (Transaction) {}
+    rpc GetTotalSales (GetTotalSalesRequest) returns (GetTotalSalesResponse) {}
+    rpc GetSalesByProduct (GetSalesByProductRequest) returns (GetSalesByProductResponse) {}
+    rpc CreateTransaction (CreateTransactionRequest) returns (Transaction) {}
+    rpc ListTransactions (ListTransactionsRequest) returns (stream Transaction) {}
+}
+

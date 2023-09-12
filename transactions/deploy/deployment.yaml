@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transactions-deployment
+  labels:
+    app: transactions-deployment
+spec:
+  selector:
+    matchLabels:
+      app: transactions-deployment
+  template:
+    metadata:
+      labels:
+        app: transactions-deployment
+    spec:
+      containers:
+        - name: transactions
+          image: docker.io/bazel/transactions/cmd/serve:image
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

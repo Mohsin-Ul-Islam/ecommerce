@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalogue-deployment
+  labels:
+    app: catalogue-deployment
+spec:
+  selector:
+    matchLabels:
+      app: catalogue-deployment
+  template:
+    metadata:
+      labels:
+        app: catalogue-deployment
+    spec:
+      containers:
+        - name: catalogue
+          image: docker.io/bazel/catalogue/cmd/serve:image
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

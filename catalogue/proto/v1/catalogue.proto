@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package catalogue.v1;
+
+message Product {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+    string image_url = 4;
+    double price = 5;
+    uint32 available_quantity = 6;
+}
+
+message GetProductByIdRequest {
+    string id = 1;
+}
+
+message AdjustQuantityRequest {
+    string id = 1;
+    int32 adjustment = 2;
+}
+
+service CatalogueService {
+    rpc GetProductById(GetProductByIdRequest) returns (Product) {}
+    rpc AdjustQuantity(AdjustQuantityRequest) returns (Product) {}
+}

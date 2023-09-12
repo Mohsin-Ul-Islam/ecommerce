@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customers-deployment
+  labels:
+    app: customers-deployment
+spec:
+  selector:
+    matchLabels:
+      app: customers-deployment
+  template:
+    metadata:
+      labels:
+        app: customers-deployment
+    spec:
+      containers:
+        - name: customers
+          image: docker.io/bazel/customers/cmd/serve:image
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "transactions",
+    srcs = [
+        "mapper.go",
+        "store.go",
+    ],
+    importpath = "github.com/mohsin-ul-islam/ecommerce/transactions",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//transactions/proto/v1:proto",
+        "@com_github_jackc_pgx_v5//:pgx",
+    ],
+)

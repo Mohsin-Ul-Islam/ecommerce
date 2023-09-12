@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package customers.v1;
+
+message Customer {
+    string id = 1;
+    string email = 2;
+    string phone_number = 3;
+    string first_name = 4;
+    string last_name = 5;
+}
+
+message CustomersList {
+    repeated Customer customers = 1;
+}
+
+message GetCustomerByIdRequest {
+    string id = 1;
+}
+
+message GetCustomerByEmailRequest {
+    string email = 1;
+}
+
+message GetCustomerByPhoneNumberRequest {
+    string phone_number = 1;
+}
+
+message GetCustomersOrderedBySalesRequest {
+    uint32 limit = 1;
+}
+
+service CustomerService {
+    rpc GetCustomerById(GetCustomerByIdRequest) returns (Customer) {}
+    rpc GetCustomerByEmail(GetCustomerByEmailRequest) returns (Customer) {}
+    rpc GetCustomerByPhoneNumber(GetCustomerByPhoneNumberRequest) returns (Customer) {}
+    rpc GetCustomersOrderedBySales(GetCustomersOrderedBySalesRequest) returns (CustomersList) {}
+}
+

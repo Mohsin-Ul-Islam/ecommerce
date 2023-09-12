@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "api",
+    srcs = ["service.go"],
+    importpath = "github.com/mohsin-ul-islam/ecommerce/catalogue/api/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//catalogue",
+        "//catalogue/proto/v1:proto",
+        "@com_github_jackc_pgx_v5//:pgx",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+    ],
+)

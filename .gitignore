@@ -1,0 +1,7 @@
+gen
+.idea
+requests.http
+cockroach-data
+bazel-*
+.ijwb
+tools/gopackagesdriver.sh

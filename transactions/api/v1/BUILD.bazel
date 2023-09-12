@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "api",
+    srcs = ["service.go"],
+    importpath = "github.com/mohsin-ul-islam/ecommerce/transactions/api/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//catalogue/proto/v1:proto",
+        "//customers/proto/v1:proto",
+        "//transactions",
+        "//transactions/proto/v1:proto",
+        "@com_github_jackc_pgx_v5//:pgx",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//credentials/insecure",
+        "@org_golang_google_grpc//status",
+    ],
+)
