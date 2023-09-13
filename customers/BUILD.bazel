@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "customers",
@@ -12,4 +12,11 @@ go_library(
         "//customers/proto/v1:proto",
         "@com_github_jackc_pgx_v5//:pgx",
     ],
+)
+
+go_test(
+    name = "customers_test",
+    srcs = ["mapper_test.go"],
+    embed = [":customers"],
+    deps = ["@com_github_stretchr_testify//assert"],
 )
