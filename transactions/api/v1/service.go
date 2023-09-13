@@ -91,8 +91,10 @@ func (s *TransactionService) CreateTransaction(
 	if err != nil {
 		return nil, err
 	}
-
-	s.transactionsStreamChan <- *createdTransaction
+	select {
+	case s.transactionsStreamChan <- *createdTransaction:
+	default:
+	}
 	return transactions.TransactionToProto(createdTransaction), nil
 }
 
