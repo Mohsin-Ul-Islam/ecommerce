@@ -19,3 +19,12 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
+          env:
+            - name: COCKROACH_HOST
+              value: database-service
+            - name: COCKROACH_PORT
+              value: "26257"
+            - name: COCKROACH_USER
+              value: root
+            - name: COCKROACH_DATA
+              value: defaultdb

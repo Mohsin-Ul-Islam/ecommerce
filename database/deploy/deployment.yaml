@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+  labels:
+    app: database-deployment
+spec:
+  selector:
+    matchLabels:
+      app: database-deployment
+  template:
+    metadata:
+      labels:
+        app: database-deployment
+    spec:
+      containers:
+        - name: database
+          image: cockroachdb/cockroach:v23.1.8
+          ports:
+            - containerPort: 26257
+          command:
+            - sh
+            - -c
+            - /cockroach/cockroach start-single-node --insecure --advertise-addr=0.0.0.0 --listen-addr=0.0.0.0:26257
+

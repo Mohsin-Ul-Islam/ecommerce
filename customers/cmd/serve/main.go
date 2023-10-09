@@ -20,7 +20,12 @@ func main() {
 		port = "8080"
 	}
 
-	conn, err := pgx.Connect(context.Background(), "postgresql://root@localhost:26257/defaultdb?sslmode=disable")
+	conn, err := pgx.Connect(context.Background(), fmt.Sprintf("postgresql://%s@%s:%s/%s?sslmode=disable",
+		os.Getenv("COCKROACH_USER"),
+		os.Getenv("COCKROACH_HOST"),
+		os.Getenv("COCKROACH_PORT"),
+		os.Getenv("COCKROACH_DATA")))
+
 	if err != nil {
 		log.Println("cannot connect to database")
 		log.Fatal(err.Error())
@@ -28,7 +33,7 @@ func main() {
 
 	listener, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%s", port))
 	if err != nil {
-		log.Println(fmt.Sprintf("cannot listen on :%s"), port)
+		log.Println(fmt.Sprintf("cannot listen on :%s", port))
 		log.Fatal(err.Error())
 	}
 
