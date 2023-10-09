@@ -1,5 +1,10 @@
 Please note that the below steps can be automated and optimized using a shell script.
 
+Local Development Environment (using script)
+==========================================
+
+``chmod +x ./scripts/run.sh && ./scripts/run.sh``
+
 Local Development Environment (no minikube)
 ==========================================
 
@@ -43,11 +48,11 @@ Local Development Environment (with minikube)
 
 Create docker images of the services
 
-``bazel build //customers/cmd/serve:image``
+``bazel run //customers/cmd/serve:image``
 
-``bazel build //catalogue/cmd/serve:image``
+``bazel run //catalogue/cmd/serve:image``
 
-``bazel build //transactions/cmd/serve:image``
+``bazel run //transactions/cmd/serve:image``
 
 Start minikube
 
@@ -55,11 +60,11 @@ Start minikube
 
 Create cockroachdb
 
-``minikube kubectl -- deployments create cockroachdb --image=cockroachdb/cockroach:v23.1.8``
+``minikube kubectl -- create deployment cockroachdb --image=cockroachdb/cockroach:v23.1.8``
 
 Create temporal server
 
-``minikube kubectl -- deployments create temporal --image=temporalio/server:latest``
+``minikube kubectl -- create deployment temporal --image=temporalio/server:latest``
 
 
 Push ecommerce images to minikube (built in previous section)
