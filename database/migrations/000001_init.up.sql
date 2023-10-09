@@ -31,7 +31,7 @@ create table if not exists transactions (
 create table if not exists wallets (
                                             id uuid primary key not null default gen_random_uuid(),
                                             customer_id uuid not null references customers(id),
-                                            balance double not null,
+                                            balance double precision not null,
                                             created_at timestamp with time zone not null default current_timestamp,
                                             updated_at timestamp with time zone not null default current_timestamp
 );
